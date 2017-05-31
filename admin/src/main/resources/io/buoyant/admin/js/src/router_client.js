@@ -143,8 +143,14 @@ define([
       // collapse client section by default (deal with large # of clients)
       toggleClientDisplay(shouldExpandInitially);
 
-      $expandLink.click(function() { toggleClientDisplay(true); });
-      $collapseLink.click(function() { toggleClientDisplay(false); });
+      $expandLink.click(function() {
+        $container.trigger("expand-custom");
+        toggleClientDisplay(true);
+      });
+      $collapseLink.click(function() {
+        $container.trigger("expand-custom");
+        toggleClientDisplay(false);
+      });
 
       function toggleClientDisplay(expand) {
         if (expand) {
@@ -196,7 +202,8 @@ define([
 
       return {
         label: client,
-        isExpired: isExpired
+        isExpired: isExpired,
+        toggleClientDisplay: toggleClientDisplay
       };
     };
   })();
